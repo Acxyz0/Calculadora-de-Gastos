@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="styles/style.css" />
+        <title>Calculadora de Gastos</title>
+    </head>
+    <body>
+        <div class="contenedor">
+            <header>
+                <h1>Calculadora de Gastos</h1>
+            </header>
+
+            <main class="contenido-principal">
+                <div class="fila">
+                    <div class="columna">
+                        <div class="formulario">
+                            <h2>Ingresa tus gastos aquí</h2>
+                            <form id="form-agregar-gasto" action="#">
+                                <div class="campos">
+                                    <label
+                                        class="campos-label"
+                                        for="nombre-gasto"
+                                        >Nombre</label
+                                    >
+                                    <input
+                                        type="text"
+                                        name="nombre-gasto"
+                                        class="campos-input"
+                                        id="nombre-gasto"
+                                        placeholder="Nombre del Gasto"
+                                    />
+                                </div>
+                                <div class="campos">
+                                    <label
+                                        class="campos-label"
+                                        for="descripcion-gasto"
+                                        >Descripción</label
+                                    >
+                                    <textarea
+                                        name="descripcion-gasto"
+                                        class="campos-input"
+                                        id="descripcion-gasto"
+                                        rows="3"
+                                        placeholder="Descripción del Gasto"
+                                    ></textarea>
+                                </div>
+                                <div class="campos">
+                                    <label
+                                        class="campos-label"
+                                        for="cantidad-gasto"
+                                        >Gasto</label
+                                    >
+                                    <input
+                                        type="number"
+                                        class="campos-input"
+                                        name="cantidad-gasto"
+                                        id="cantidad-gasto"
+                                        min="1"
+                                        placeholder="Cantidad en Q"
+                                    />
+                                </div>
+
+                                <button type="submit" class="btn-agregar">
+                                    Agregar
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="columna">
+                        <div class="cards-gastos">
+                            <h2>Gastos</h2>
+
+                            <div class="lista-gastos">
+                                <ul id="lista" class="lista"></ul>
+                            </div>
+
+                            <div
+                                class="presupuesto-content"
+                                id="presupuesto-content"
+                            >
+                                <div class="presupuesto">
+                                    <p>
+                                        Presupuesto:
+                                        <span id="total"></span>
+                                    </p>
+                                </div>
+                                <div class="restante">
+                                    <p>Restante: <span id="restante"></span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <script src="scripts/app.js"></script>
+    </body>
+</html>
