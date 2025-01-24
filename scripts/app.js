@@ -87,8 +87,12 @@ function creacionCards(gastos) {
 
         // Crear el div de la card
         const liCard = document.createElement("li");
+        liCard.classList.add("liCard");
+
         const divCard = document.createElement("div");
         divCard.classList.add("divCard");
+
+        const divDatos = document.createElement("div");
 
         // Crear el contenido de las Cards
         const nombreCard = document.createElement("h4");
@@ -112,10 +116,13 @@ function creacionCards(gastos) {
         };
 
         // Insertar los elementos correspondientes
-        divCard.appendChild(nombreCard);
-        divCard.appendChild(descripcionCard);
-        divCard.appendChild(cantidadCard);
+        divDatos.appendChild(descripcionCard);
+        divDatos.appendChild(cantidadCard);
+
+        divCard.appendChild(divDatos);
         divCard.appendChild(btnEliminar);
+
+        liCard.appendChild(nombreCard);
         liCard.appendChild(divCard);
         listaGastos.appendChild(liCard);
 
@@ -169,7 +176,7 @@ function comprobarPresupuesto(restante) {
         contRestante.classList.remove("restante-menor");
     }
 
-    // Valida si se agoto el presupuesto
+    // Valida si se agotó el presupuesto
     if (restante <= 0) {
         mostrarRestante.textContent = `El presupuesto se ha agotado`;
         return;

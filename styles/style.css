@@ -200,12 +200,18 @@ textarea {
 }
 
 /* ESTILOS SCRIPTING */
-.divCard {
+.liCard {
     padding: 0 5px;
     border-radius: 5px;
     background-color: #e6e5e55b;
     box-shadow: 2px 5px 5px rgba(119, 119, 119, 0.404);
     margin-bottom: 10px;
+}
+
+.divCard {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 5px;
 }
 
 .nombreCard {
@@ -219,6 +225,7 @@ textarea {
     margin: 0;
 }
 
+/* Botón eliminar */
 .btn-eliminar {
     background-color: #ec3939;
     border-radius: 5px;
