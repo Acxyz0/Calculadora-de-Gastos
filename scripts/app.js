@@ -12,16 +12,15 @@ const cantidadGasto = document.querySelector("#cantidad-gasto");
 
 // VARIABLES
 let objGastos = [];
-const presupuesto = Number(5000);
-let restante = Number(presupuesto);
+let presupuesto;
+let restante;
 
 // INICIAR APP
 eventListeners();
 
 function eventListeners() {
+    document.addEventListener("DOMContentLoaded", ingresarPresupuesto);
     formulario.addEventListener("submit", agregarGasto);
-    mostrarPresupuesto();
-    calcularRestante();
 }
 
 // FUNCIONES
@@ -58,7 +57,9 @@ function agregarGasto(e) {
 
     formulario.reset();
 
+    alertaCorrecto();
     creacionCards(objGastos);
+    calcularRestante();
     comprobarPresupuesto(restante);
 }
 
@@ -131,13 +132,21 @@ function creacionCards(gastos) {
 }
 
 // Función para eliminar un gasto
-function eliminarGasto(id) {
-    objGastos = objGastos.filter((gasto) => gasto.id !== id);
+async function eliminarGasto(id) {
+    const confirmar = await alertaEliminarGasto();
 
-    calcularRestante();
+    // Si confirmar es igual a true elimina el gasto
+    if (confirmar) {
+        objGastos = objGastos.filter((gasto) => gasto.id !== id);
 
-    creacionCards(objGastos);
-    comprobarPresupuesto(restante);
+        calcularRestante();
+        creacionCards(objGastos);
+        comprobarPresupuesto(restante);
+
+        Swal.fire("¡Eliminado!", "El gasto ha sido eliminado.", "success");
+    } else {
+        Swal.fire("Cancelado", "Tu gasto sigue intacto.", "info");
+    }
 }
 
 // Mostrar el presupuesto
@@ -191,4 +200,62 @@ function limpiarHTML() {
     while (listaGastos.firstChild) {
         listaGastos.removeChild(listaGastos.firstChild);
     }
+}
+
+// ALERTAS
+function alertaCorrecto() {
+    Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Tu gasto se añadió correctamente",
+        showConfirmButton: false,
+        timer: 1500,
+    });
+}
+
+function alertaEliminarGasto() {
+    return Swal.fire({
+        title: "¿Estás seguro?",
+        text: "Este gasto será eliminado permanentemente.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Sí, eliminar",
+        cancelButtonText: "Cancelar",
+    }).then((result) => {
+        return result.isConfirmed;
+    });
+}
+
+function ingresarPresupuesto() {
+    Swal.fire({
+        title: "Ingresa tu presupuesto",
+        input: "number",
+        inputPlaceholder: "Ejemplo: Q5000",
+        inputAttributes: {
+            min: 1,
+        },
+        showCancelButton: false,
+        confirmButtonText: "Aceptar",
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        inputValidator: (value) => {
+            if (!value || value <= 0) {
+                return "Por favor, ingresa un valor mayor a 0.";
+            }
+        },
+    }).then((result) => {
+        if (result.isConfirmed) {
+            presupuesto = Number(result.value);
+            restante = presupuesto;
+
+            mostrarPresupuesto();
+            calcularRestante();
+
+            Swal.fire(
+                "¡Presupuesto guardado!",
+                `Tu presupuesto inicial es de Q${presupuesto}`,
+                "success"
+            );
+        }
+    });
 }
