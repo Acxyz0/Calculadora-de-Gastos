@@ -1,5 +1,4 @@
 // SELECTORES
-
 // Generales
 const formulario = document.querySelector("#form-agregar-gasto");
 const listaGastos = document.querySelector("#lista");
@@ -24,7 +23,6 @@ function eventListeners() {
 }
 
 // FUNCIONES
-
 // Función para guardar el gasto
 function agregarGasto(e) {
     e.preventDefault();
@@ -61,22 +59,6 @@ function agregarGasto(e) {
     creacionCards(objGastos);
     calcularRestante();
     comprobarPresupuesto(restante);
-}
-
-// Función para generar las Alertas
-function mostrarAlerta(mensaje, tipo) {
-    if (tipo === "error") {
-        nombreGasto.classList.add("campos-input-error");
-        cantidadGasto.classList.add("campos-input-error");
-    } else if (tipo === "valorMenor") {
-        cantidadGasto.classList.add("campos-input-error");
-    } else {
-    }
-
-    setTimeout(() => {
-        nombreGasto.classList.remove("campos-input-error");
-        cantidadGasto.classList.remove("campos-input-error");
-    }, 5000);
 }
 
 // Crear las cards
@@ -139,8 +121,8 @@ async function eliminarGasto(id) {
     if (confirmar) {
         objGastos = objGastos.filter((gasto) => gasto.id !== id);
 
-        calcularRestante();
         creacionCards(objGastos);
+        calcularRestante();
         comprobarPresupuesto(restante);
 
         Swal.fire("¡Eliminado!", "El gasto ha sido eliminado.", "success");
@@ -195,6 +177,22 @@ function comprobarPresupuesto(restante) {
     mostrarRestante.textContent = `Q${restante}`;
 }
 
+// Función para generar las Alertas en los inputs
+function mostrarAlerta(mensaje, tipo) {
+    if (tipo === "error") {
+        nombreGasto.classList.add("campos-input-error");
+        cantidadGasto.classList.add("campos-input-error");
+    } else if (tipo === "valorMenor") {
+        cantidadGasto.classList.add("campos-input-error");
+    } else {
+    }
+
+    setTimeout(() => {
+        nombreGasto.classList.remove("campos-input-error");
+        cantidadGasto.classList.remove("campos-input-error");
+    }, 5000);
+}
+
 // Función para limpiar el HTML
 function limpiarHTML() {
     while (listaGastos.firstChild) {
@@ -202,30 +200,7 @@ function limpiarHTML() {
     }
 }
 
-// ALERTAS
-function alertaCorrecto() {
-    Swal.fire({
-        position: "center",
-        icon: "success",
-        title: "Tu gasto se añadió correctamente",
-        showConfirmButton: false,
-        timer: 1500,
-    });
-}
-
-function alertaEliminarGasto() {
-    return Swal.fire({
-        title: "¿Estás seguro?",
-        text: "Este gasto será eliminado permanentemente.",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonText: "Sí, eliminar",
-        cancelButtonText: "Cancelar",
-    }).then((result) => {
-        return result.isConfirmed;
-    });
-}
-
+// Función para guardar el presupuesto en la variable
 function ingresarPresupuesto() {
     Swal.fire({
         title: "Ingresa tu presupuesto",
@@ -257,5 +232,39 @@ function ingresarPresupuesto() {
                 "success"
             );
         }
+    });
+}
+
+// ALERTAS
+function alertaCorrecto() {
+    Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Tu gasto se añadió correctamente",
+        showConfirmButton: false,
+        timer: 1500,
+    });
+}
+
+function alertaError() {
+    Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Your work has been saved",
+        showConfirmButton: false,
+        timer: 1500,
+    });
+}
+
+function alertaEliminarGasto() {
+    return Swal.fire({
+        title: "¿Estás seguro?",
+        text: "Este gasto será eliminado permanentemente.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Sí, eliminar",
+        cancelButtonText: "Cancelar",
+    }).then((result) => {
+        return result.isConfirmed;
     });
 }

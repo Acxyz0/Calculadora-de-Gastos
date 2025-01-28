@@ -15,8 +15,8 @@ body {
 }
 
 /* Titulos y subtitulos */
-h2,
-h1 {
+h1,
+h2 {
     text-align: center;
 }
 
@@ -29,9 +29,7 @@ textarea {
     overflow: auto;
 }
 
-/* CLASES */
-
-/* contenido principal */
+/* CONTENIDO PRINCIPAL */
 .contenido-principal {
     background-color: #fff;
     margin: 0 5%;
@@ -41,62 +39,14 @@ textarea {
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.247);
 }
 
-@media (min-width: 420px) {
-    .contenido-principal {
-        margin: 0 10%;
-    }
-}
-
-@media (min-width: 768px) {
-    .contenido-principal {
-        margin: 0 20%;
-    }
-}
-
-/* botón agregar */
-.btn-agregar {
-    width: 100%;
-    height: 2rem;
-    color: #0404b7;
-    border: solid 2px #0404b7;
-    border-radius: 5px;
-    background-color: #fff;
-    font-weight: bold;
-    transition-duration: 500ms;
-}
-
-.btn-agregar:hover {
-    background-color: #0404b7;
-    color: #fff;
-    transition: all;
-    transition-duration: 500ms;
-}
-
-.btn-agregar:active {
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.btn-agregar:focus {
-    border-color: #1616d7;
-    outline: none;
-    box-shadow: 0 0 4px rgba(22, 22, 215, 0.5);
-}
-
-/* grid para los elementos */
+/* grid para formulario y gastos */
 .fila {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     gap: 2rem;
 }
 
-@media (min-width: 768px) {
-    .fila {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-/* Formulario */
+/* FORMULARIO */
 .formulario,
 .cards-gastos {
     margin: 10px 0;
@@ -133,13 +83,15 @@ textarea {
     box-shadow: 0 0 4px rgba(215, 22, 28, 0.5);
 }
 
-/* card gastos */
+/* GASTOS Y CARDS */
+/* contenedor para ver los gastos */
 .cards-gastos {
     display: flex;
     flex-direction: column;
     height: 360px;
 }
 
+/* contenedor ul */
 .lista-gastos {
     flex: 1;
     overflow-y: auto;
@@ -148,25 +100,47 @@ textarea {
     max-height: 300px;
 }
 
+/* ul */
 .lista {
     margin: 0;
     padding: 0;
     list-style: none;
 }
 
-/* mostrar presupuesto */
+/* scripting */
+.liCard {
+    padding: 0 5px;
+    border-radius: 5px;
+    background-color: #e6e5e55b;
+    box-shadow: 2px 5px 5px rgba(119, 119, 119, 0.404);
+    margin-bottom: 10px;
+}
+
+/* contenedor de los elementos */
+.divCard {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 5px;
+}
+
+.nombreCard,
+.descripcionCard,
+.cantidadCard {
+    margin: 0;
+}
+
+.nombreCard {
+    text-align: center;
+    padding-top: 2px;
+}
+
+/* PRESUPUESTO Y RESTANTE */
+/* presupuesto */
 .presupuesto-content {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     gap: 5px;
     margin-top: auto;
-}
-
-@media (min-width: 920px) {
-    .presupuesto-content {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-    }
 }
 
 .presupuesto,
@@ -199,30 +173,34 @@ textarea {
     color: #fff;
 }
 
-/* ESTILOS SCRIPTING */
-.liCard {
-    padding: 0 5px;
+/* BOTONES */
+/* Botón agregar */
+.btn-agregar {
+    width: 100%;
+    height: 2rem;
+    color: #0404b7;
+    border: solid 2px #0404b7;
     border-radius: 5px;
-    background-color: #e6e5e55b;
-    box-shadow: 2px 5px 5px rgba(119, 119, 119, 0.404);
-    margin-bottom: 10px;
+    background-color: #fff;
+    font-weight: bold;
+    transition-duration: 500ms;
 }
 
-.divCard {
-    display: flex;
-    justify-content: space-between;
-    padding-bottom: 5px;
+.btn-agregar:hover {
+    background-color: #0404b7;
+    color: #fff;
+    transition: all;
+    transition-duration: 500ms;
 }
 
-.nombreCard {
-    text-align: center;
-    padding-top: 2px;
+.btn-agregar:active {
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-.nombreCard,
-.descripcionCard,
-.cantidadCard {
-    margin: 0;
+.btn-agregar:focus {
+    border-color: #1616d7;
+    outline: none;
+    box-shadow: 0 0 4px rgba(22, 22, 215, 0.5);
 }
 
 /* Botón eliminar */
@@ -239,4 +217,29 @@ textarea {
 .btn-eliminar:hover {
     background-color: #be1515;
     cursor: pointer;
+}
+
+/* MEDIA QUERIES */
+@media (min-width: 420px) {
+    .contenido-principal {
+        margin: 0 10%;
+    }
+}
+
+@media (min-width: 768px) {
+    .contenido-principal {
+        margin: 0 20%;
+    }
+
+    .fila {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 920px) {
+    .presupuesto-content {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
