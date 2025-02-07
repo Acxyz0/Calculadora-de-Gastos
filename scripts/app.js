@@ -32,13 +32,25 @@ function agregarGasto(e) {
     const valorCantidadGasto = cantidadGasto.value;
 
     // Validar formulario
+    if (valorNombreGasto === "" && valorCantidadGasto !== "") {
+        mostrarAlerta("El campo nombre no debe estar vacío", "errorNombre");
+        return;
+    }
+
+    if (valorCantidadGasto === "" && valorNombreGasto !== "") {
+        mostrarAlerta("El campo cantidad no debe estar vacío", "errorCantidad");
+        return;
+    }
+
     if (valorNombreGasto === "" || valorCantidadGasto === "") {
         mostrarAlerta("Llenar los campos obligatorios", "error");
         return;
-    } else if (valorCantidadGasto <= 0) {
+    }
+
+    if (valorCantidadGasto <= 0) {
         mostrarAlerta(
             "Cantidad no válida, Ingrese un valor mayor a 0",
-            "valorMenor"
+            "errorMenor"
         );
         return;
     }
@@ -180,11 +192,15 @@ function comprobarPresupuesto(restante) {
 // Función para generar las Alertas en los inputs
 function mostrarAlerta(mensaje, tipo) {
     if (tipo === "error") {
+        alertaError(mensaje);
         nombreGasto.classList.add("campos-input-error");
         cantidadGasto.classList.add("campos-input-error");
-    } else if (tipo === "valorMenor") {
+    } else if (tipo === "errorMenor" || tipo === "errorCantidad") {
+        alertaError(mensaje);
         cantidadGasto.classList.add("campos-input-error");
     } else {
+        alertaError(mensaje);
+        nombreGasto.classList.add("campos-input-error");
     }
 
     setTimeout(() => {
@@ -246,11 +262,11 @@ function alertaCorrecto() {
     });
 }
 
-function alertaError() {
+function alertaError(mensaje) {
     Swal.fire({
         position: "top-end",
-        icon: "success",
-        title: "Your work has been saved",
+        icon: "error",
+        title: mensaje,
         showConfirmButton: false,
         timer: 1500,
     });
