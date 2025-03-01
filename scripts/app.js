@@ -1,10 +1,8 @@
 // SELECTORES
-// Generales
 const formulario = document.querySelector("#form-agregar-gasto");
 const listaGastos = document.querySelector("#lista");
 const mostrarRestante = document.querySelector("#restante");
 
-// Inputs formulario
 const nombreGasto = document.querySelector("#nombre-gasto");
 const descripcionGasto = document.querySelector("#descripcion-gasto");
 const cantidadGasto = document.querySelector("#cantidad-gasto");
@@ -23,31 +21,36 @@ function eventListeners() {
 }
 
 // FUNCIONES
-// Función para guardar el gasto
+
+// GUARDAR EL GASTO
 function agregarGasto(e) {
     e.preventDefault();
 
-    const valorNombreGasto = nombreGasto.value;
-    const valorDescripcionGasto = descripcionGasto.value;
-    const valorCantidadGasto = cantidadGasto.value;
-
     // Validar formulario
-    if (valorNombreGasto === "" && valorCantidadGasto !== "") {
+    if (nombreGasto.value === "" && cantidadGasto.value !== "") {
         mostrarAlerta("El campo nombre no debe estar vacío", "errorNombre");
         return;
     }
 
-    if (valorCantidadGasto === "" && valorNombreGasto !== "") {
+    if (cantidadGasto.value === "" && nombreGasto.value !== "") {
         mostrarAlerta("El campo cantidad no debe estar vacío", "errorCantidad");
         return;
     }
 
-    if (valorNombreGasto === "" || valorCantidadGasto === "") {
+    if (nombreGasto.value === "" || cantidadGasto.value === "") {
         mostrarAlerta("Llenar los campos obligatorios", "error");
         return;
     }
 
-    if (valorCantidadGasto <= 0) {
+    if (cantidadGasto.value > restante) {
+        mostrarAlerta(
+            "La cantidad ingresada supera el restante",
+            "errorCantidad"
+        );
+        return;
+    }
+
+    if (cantidadGasto.value <= 0) {
         mostrarAlerta(
             "Cantidad no válida, Ingrese un valor mayor a 0",
             "errorMenor"
@@ -58,9 +61,9 @@ function agregarGasto(e) {
     // Generar un nuevo objeto
     const nuevoGasto = {
         id: Date.now(),
-        nombre: valorNombreGasto,
-        descripcion: valorDescripcionGasto,
-        cantidad: Number(valorCantidadGasto),
+        nombre: nombreGasto.value,
+        descripcion: descripcionGasto.value,
+        cantidad: Number(cantidadGasto.value),
     };
 
     objGastos = [...objGastos, nuevoGasto];
@@ -76,6 +79,10 @@ function agregarGasto(e) {
 // Crear las cards
 function creacionCards(gastos) {
     limpiarHTML();
+
+    if (gastos.length === 0) {
+        listaGastos.innerHTML = `<p class="mensaje">No hay gastos</p>`;
+    }
 
     gastos.forEach((gasto) => {
         const { id, nombre, descripcion, cantidad } = gasto;

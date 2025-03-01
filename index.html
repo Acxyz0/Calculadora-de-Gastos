@@ -4,6 +4,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="styles/style.css" />
+        <link rel="icon" type="image/x-icon" href="icon.ico" />
         <title>Calculadora de Gastos</title>
     </head>
     <body>
@@ -57,6 +58,7 @@
                                         class="campos-input"
                                         name="cantidad-gasto"
                                         id="cantidad-gasto"
+                                        step="0.01"
                                         placeholder="Cantidad en Q"
                                     />
                                 </div>
@@ -73,7 +75,9 @@
                             <h2>Gastos</h2>
 
                             <div class="lista-gastos">
-                                <ul id="lista" class="lista"></ul>
+                                <ul id="lista" class="lista">
+                                    No hay gastos
+                                </ul>
                             </div>
 
                             <div
