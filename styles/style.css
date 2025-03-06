@@ -27,6 +27,7 @@ header {
 
 textarea {
     overflow: auto;
+    resize: none;
 }
 
 /* CONTENIDO PRINCIPAL */
